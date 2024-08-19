@@ -1,0 +1,57 @@
+% Document class and two-column conversion
+\documentclass[twocolumn]{report}
+% dimensions of paper and relative text positioning
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+% package for including URLs
+\usepackage{url}
+
+% Start of the document
+\begin{document}
+
+% Title page
+\title{\Huge \bfseries A pure Julia implementation of the SG-t-SNE-Pi algorithm} %\Huge and \bfseries are used to make the title bigger and bold
+\author{Konstantinos Fotios Papadakis\vspace{0.5cm} \\  AEM:10371} % \vspace{0.5cm} is used to add some vertical space between the author and the AEM
+\date{\today}
+% prints the title, author and date on a separate page
+\maketitle
+
+% Table of contents page
+\tableofcontents
+
+% Abstract page
+\input{sections/abstract}
+
+% Theoretical background chapter
+\chapter{Theoretical background}
+\section{Introduction to t-SNE}
+\input{sections/tsne}
+\section{Extension of t-SNE to SG-t-SNE (SG-t-SNE-Pi.jl)}
+\section{Software architecture}
+\section{Functionality and conceptual insights of key components}
+
+% Benchmarking current implementation chapter
+\chapter{Benchmarking our current Burnes-Hut implementation}
+\section{Code profiling}
+\section{Benchmarking}
+\section{Results}
+
+% Times improvement and code modifications chapter
+\chapter{Code modifications and time improvements}
+\section{Code modifications}
+\section{Time improvements}
+
+% Conclusion chapter
+\chapter{Conclusions}
+\section{Verdict}
+
+
+
+% Bibliography
+\nocite{*} % Include all references in the bibliography, even if they are not cited in the report
+\bibliographystyle{plain}
+\renewcommand{\bibname}{Bibliography}
+\bibliography{references/references} % We have to include the references somewhere in the report for them to show here if we don't use (\nocite{*})
+\addcontentsline{toc}{chapter}{\bibname}
+
+% End of the document
+\end{document}

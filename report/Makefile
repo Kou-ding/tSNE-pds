@@ -1,11 +1,12 @@
 SHELL := /bin/bash
 
-TEX_MAIN = main.tex
+TEX_MAIN = report.tex
 
-.PHONY: all clean
+all: report
 
-all: $(TEX_MAIN)
+report: $(TEX_MAIN)
 	latexmk -pdf $(TEX_MAIN)
 
 clean:
 	latexmk -C $(TEX_MAIN)
+	rm -f *.bbl 
