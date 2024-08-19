@@ -1,31 +1,46 @@
-T-SNE stands for t distributed stochastic neighbor embedding. "T" comes from the type of distribution we use,
-Student t-distribution, "Stochastic" comes from the fact that the algorithm is probabilistic in nature, "Neighbor"
-comes from the fact that we try to preserve the neighbor relations between data points and finally "embedding"
-comes from the fact that we cramp up these relations, in a lower than the initial, dimensional space. t-SNE
-is one state-of-the-art technique for dimensional reduction mainly used for visualization purposes. It is a 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Acquired knowledge %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% $word$ is used to print a mathematically formatted word                  %
+% $$word$$ is used to print a mathematically formatted word in a new line  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+t-SNE stands for t distributed stochastic neighbor embedding. 
+\begin{itemize}
+    \item "t" comes from the type of distribution we use, Student t-distribution.
+    \item "Stochastic" comes from the fact that the algorithm is probabilistic in nature.
+    \item "Neighbor" comes from the fact that we try to preserve the neighbor relations between data points.
+    \item "Embedding" comes from the fact that we try to preserve these relations in a lower dimensional space.
+\end{itemize}
+t-SNE is one state-of-the-art technique for dimensional reduction mainly used for visualization purposes. It is a 
 way to represent data that reside in a high dimensional space by using a low dimensional graph, all while 
 retaining the information of the high dimensional space. To achieve this we have to determine the probability
 of two data points being neighbors which can be described by the following equation:
-$$P_{i|j} = \frac{exp(-||x_i - x_j||^2 / 2\sigma_i^2)}{\sum_{k \neq i} exp(-||x_i - x_k||^2 / 2\sigma_i^2)}$$
+$$P_{j|i} = \frac{exp(-||x_i - x_j||^2 / 2\sigma_i^2)}{\sum_{k \neq i} exp(-||x_i - x_k||^2 / 2\sigma_i^2)}$$
+\cite[page 3225]{accelerating_tsne}
 
 Despite its complicated appearance, it is just a division between two Gaussian probability density functions.
 Now, when picking two points at random the probability is given by the following formula that shows how similar
 the higher embeddings are:
-$$P_{ij} = \frac{P_{i|j} + P_{j|i}}{N}$$
+$$P_{ij} = \frac{P_{i|j} + P_{j|i}}{2N}$$
+\cite[page 3226]{accelerating_tsne}
 
 Similarly, the lower embeddings are: 
 $$Q_{ij} = \frac{(1 + ||y_i - y_j||^2)^{-1}}{\sum_{k \neq l} (1 + ||y_k - y_l||^2)^{-1}}$$
+\cite[page 3225]{accelerating_tsne}
 
 Because we are moving from a high to a low dimensional space we have limited space to translate the existing
-data. This is why there is a need to fit more points in a dimension that wasn't initially designed to fit them.
-To solve this problem we use a one-degree-of-freedom Students t-distribution, also known as the Cauchy 
-distribution, which has a heavier tail.
+data. After all, we can only perceive and depict data in 3 or fewer dimensions. This is why there is a need to
+fit more points in a dimension that wasn't initially designed to fit them. To solve this problem we use a 
+one-degree-of-freedom Students t-distribution, also known as the Cauchy distribution, which has a heavier tail.
 
 To tidy up the previous notions comes the KL divergence, which is a measure of how different two probability
 distributions are from each other:
-$$KL(P||Q) = \sum_{i \neq j} P_{i|j} log\left(\frac{P_i|j}{Q_i|j}\right)$$
+$$C(E) = KL(P||Q) = \sum_{i \neq j} P_{ij} log\left(\frac{P_{ij}}{Q_{ij}}\right)$$
+\cite[page 3225]{accelerating_tsne}
 
 When this nears zero, or ideally becomes zero, we can say that we have successfully migrated from the 
 high-dimensional graph to a lower one. Finally, the method we use to minimize the KL divergence is by
 applying gradient descent. We consider KL to be a loss function and, after taking its derivative, we
-try to minimize it by making slight changes to the $$y_i$$ and $$y_j$$ until the KL divergence is minimized.
+try to minimize it by making slight changes to the $y_i$ and $y_j$ until the KL divergence is minimized.
+$$\frac{\partial C}{\partial y_i} = 4(F_{attr} + F_{rep})$$
+$$\frac{\partial C}{\partial y_i} = 4\left(\sum_{j \neq i} P_{ij} Q_{ij} Z(y_i - y_j) - \sum_{j \neq i} Q_{ij}^2 Z(y_i - y_j)\right)$$
+\cite[page 3227]{accelerating_tsne}
+% Explain the gradient descent algorithm using various sources
