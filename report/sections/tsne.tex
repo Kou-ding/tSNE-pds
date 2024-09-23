@@ -14,17 +14,14 @@ way to represent data that reside in a high dimensional space by using a low dim
 retaining the information of the high dimensional space. To achieve this we have to determine the probability
 of two data points being neighbors which can be described by the following equation:
 $$P_{j|i} = \frac{exp(-||x_i - x_j||^2 / 2\sigma_i^2)}{\sum_{k \neq i} exp(-||x_i - x_k||^2 / 2\sigma_i^2)}$$
-\cite[page 3225]{accelerating_tsne}
 
 Despite its complicated appearance, it is just a division between two Gaussian probability density functions.
 Now, when picking two points at random the probability is given by the following formula that shows how similar
 the higher embeddings are:
 $$P_{ij} = \frac{P_{i|j} + P_{j|i}}{2N}$$
-\cite[page 3226]{accelerating_tsne}
 
 Similarly, the lower embeddings are: 
 $$Q_{ij} = \frac{(1 + ||y_i - y_j||^2)^{-1}}{\sum_{k \neq l} (1 + ||y_k - y_l||^2)^{-1}}$$
-\cite[page 3225]{accelerating_tsne}
 
 Because we are moving from a high to a low dimensional space we have limited space to translate the existing
 data. After all, we can only perceive and depict data in 3 or fewer dimensions. This is why there is a need to
@@ -34,7 +31,6 @@ one-degree-of-freedom Students t-distribution, also known as the Cauchy distribu
 To tidy up the previous notions comes the KL divergence, which is a measure of how different two probability
 distributions are from each other:
 $$C(E) = KL(P||Q) = \sum_{i \neq j} P_{ij} log\left(\frac{P_{ij}}{Q_{ij}}\right)$$
-\cite[page 3225]{accelerating_tsne}
 
 When this nears zero, or ideally becomes zero, we can say that we have successfully migrated from the 
 high-dimensional graph to a lower one. Finally, the method we use to minimize the KL divergence is by
@@ -42,5 +38,5 @@ applying gradient descent. We consider KL to be a loss function and, after takin
 try to minimize it by making slight changes to the $y_i$ and $y_j$ until the KL divergence is minimized.
 $$\frac{\partial C}{\partial y_i} = 4(F_{attr} + F_{rep})$$
 $$\frac{\partial C}{\partial y_i} = 4\left(\sum_{j \neq i} P_{ij} Q_{ij} Z(y_i - y_j) - \sum_{j \neq i} Q_{ij}^2 Z(y_i - y_j)\right)$$
-\cite[page 3227]{accelerating_tsne}
+\cite{accelerating_tsne} % line 3225, 3226, 3227
 % Explain the gradient descent algorithm using various sources
