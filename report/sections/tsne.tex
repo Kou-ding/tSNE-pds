@@ -2,7 +2,7 @@
 % $word$ is used to print a mathematically formatted word                  %
 % $$word$$ is used to print a mathematically formatted word in a new line  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-t-SNE stands for t distributed stochastic neighbor embedding. 
+t-SNE stands for t distributed Stochastic Neighbor Embedding. 
 \begin{itemize}
     \item "t" comes from the type of distribution we use, Student t-distribution.
     \item "Stochastic" comes from the fact that the algorithm is probabilistic in nature.
@@ -39,4 +39,4 @@ try to minimize it by making slight changes to the $y_i$ and $y_j$ until the KL 
 $$\frac{\partial C}{\partial y_i} = 4(F_{attr} + F_{rep})$$
 $$\frac{\partial C}{\partial y_i} = 4\left(\sum_{j \neq i} P_{ij} Q_{ij} Z(y_i - y_j) - \sum_{j \neq i} Q_{ij}^2 Z(y_i - y_j)\right)$$
 \cite{accelerating_tsne} % line 3225, 3226, 3227
-% Explain the gradient descent algorithm using various sources
+% To-do: Explain the gradient descent algorithm using various sources
