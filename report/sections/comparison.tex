@@ -1,0 +1,43 @@
+Now, to test our efforts we will be going through a detailed comparison between:
+\begin{itemize}
+    \item The original C/C++ implementation of the SG-t-SNE-Pi algorithm.
+    \item The pure Julia implementation of the SG-t-SNE-Pi algorithm before the modifications.
+    \item The pure Julia implementation of the SG-t-SNE-Pi algorithm after the modifications.
+\end{itemize}
+All the tests where performed on the same machine with the following specifications:
+\begin{itemize}
+    \item CPU: Intel Core i5-4460 @ 3.20GHz
+    \item RAM: 16GB DDR3 787MHz
+    \item OS: WSL 2 on Windows 10 Pro 64-bit
+    \item Julia version: 1.6.1
+\end{itemize}
+The P matrix used for our results was set in a pseudo-random manner to ensure reproducibility:
+\begin{lstlisting}[style=julia]
+    using SGtSNEpi, BenchmarkTools, SparseArrays, Random
+    
+    n = 2000;   # number of points
+    d = 10;     # average degree
+    
+    # Set the random seed for reproducibility
+    Random.seed!(42)
+    
+    # Generate the sparse matrix with a deterministic random pattern
+    P = sprand(n, n, d/n)
+    my_Y = rand( n, 3 )
+
+    # Benchmark the sgtsnepi function
+    results=[]
+    for i in 1:20
+        t=@elapsed SGtSNEpi.bhembed( P )
+        push!(results,t)
+    end
+\end{lstlisting}
+The results of the benchmarks are shown in the following graphs:
+\begin{itemize}
+    \item C/C++
+
+    \item Julia 
+
+    \item Julia (modified)
+
+\end{itemize}
