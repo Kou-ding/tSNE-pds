@@ -12,7 +12,14 @@ All the tests where performed on the same machine with the following specificati
     \item Julia version: 1.6.1
 \end{itemize}
 The P matrix used for our results was set in a pseudo-random manner to ensure reproducibility:
-\begin{lstlisting}[style=julia]
+\begin{minted}[breaklines,escapeinside=||,
+                mathescape=true, 
+                linenos, 
+                numbersep=3pt, 
+                gobble=2, 
+                frame=lines, 
+                fontsize=\small, 
+                framesep=2mm]{julia} 
     using SGtSNEpi, BenchmarkTools, SparseArrays, Random
     
     n = 2000;   # number of points
@@ -31,13 +38,13 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
         t=@elapsed SGtSNEpi.bhembed( P )
         push!(results,t)
     end
-\end{lstlisting}
+\end{minted}
 The results of the benchmarks are shown in the following graphs:
 \begin{itemize}
-    \item C/C++
+    \item C/C++ with Julia wrapper
 
-    \item Julia 
+    \item Pure Julia 
 
-    \item Julia (modified)
+    \item Pure Julia (modified)
 
 \end{itemize}
