@@ -1,6 +1,11 @@
-This project aims to port the C/C++ implementation of sgtsnepi in the Julia programming language hoping 
+This project aims to port the C/C++ implementation of SG-tSNE-Pi in the Julia programming language hoping 
 to achieve even faster performance. The port has already been partially successful. The code seems to be 
-functional but lacks in speed. Thus, in the next segmnets we will have to go through various utilities to 
-map the program's functions and hopefully modify it to get closer to the  
+functional but lacks in speed. Thus, in the next segments we will have to go through various utilities to 
+map the program's functions and hopefully modify it to get closer to the original implementation's performance.
 
-In order to optimize the code we need to 
+In order to optimize the code we need to figure out which parts of the code are the most time consuming.
+To do this we will use the VsCode profiler which will give us a detailed report consisting of code loops
+and their respective time consumption. The parts that take the most time are the ones that we can benefit 
+more from optimizing them.
+
+Lastly we will benchmark the code so that we can have a staring point to compare the optimized code with.
