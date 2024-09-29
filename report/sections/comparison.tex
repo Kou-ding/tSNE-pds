@@ -20,8 +20,6 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
                 frame=lines, 
                 fontsize=\small, 
                 framesep=2mm]{julia} 
-    using SGtSNEpi, BenchmarkTools, SparseArrays, Random
-    
     n = 2000;   # number of points
     d = 10;     # average degree
     
@@ -34,7 +32,7 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
 
     # Benchmark the sgtsnepi function
     results=[]
-    for i in 1:20
+    for i in 1:50
         t=@elapsed SGtSNEpi.bhembed( P )
         push!(results,t)
     end
