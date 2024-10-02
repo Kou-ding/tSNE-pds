@@ -11,7 +11,8 @@ All the tests where performed on the same machine with the following specificati
     \item OS: WSL 2 on Windows 10 Pro 64-bit
     \item Julia version: 1.10.0
 \end{itemize}
-The P matrix used for our results was set in a pseudo-random manner to ensure reproducibility:
+The P matrix used for our results was set in a pseudo-random manner to ensure reproducibility. The parameters
+used can be summed up in the following Julia code:
 \begin{minted}[breaklines,escapeinside=||,
                 mathescape=true, 
                 linenos, 
@@ -20,7 +21,7 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
                 frame=lines, 
                 fontsize=\small, 
                 framesep=2mm]{julia} 
-    n = 2000;   # number of points
+    n = 1000;   # number of points
     d = 10;     # average degree
     
     # Set the random seed for reproducibility
@@ -28,7 +29,6 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
     
     # Generate the sparse matrix with a deterministic random pattern
     P = sprand(n, n, d/n)
-    my_Y = rand( n, 3 )
 
     # Benchmark the sgtsnepi function
     results=[]
@@ -38,11 +38,15 @@ The P matrix used for our results was set in a pseudo-random manner to ensure re
     end
 \end{minted}
 The results of the benchmarks are shown in the following graphs:
-\begin{itemize}
-    \item C/C++ with Julia wrapper
-
-    \item Pure Julia 
-
-    \item Pure Julia (modified)
-
-\end{itemize}
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{media/c-c++plot.png}
+    \caption{C/C++ with Julia wrapper}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{media/c-c++pureJulia.png}
+    \caption{Pure Julia }
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{media/pureJuliaMod.png}
+    \caption{Pure Julia \(modified\)}
+\end{figure}

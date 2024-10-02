@@ -6,6 +6,8 @@
 \usepackage{url}
 % package for julia code insertion
 \usepackage{minted}
+% Required for including images
+\usepackage{graphicx}
 
 % Start of the document
 \begin{document}
@@ -21,13 +23,13 @@
 \tableofcontents
 
 % Abstract page
-\input{sections/abstract}
+%\input{sections/abstract}
 
 % Theoretical background chapter
 \chapter{Theoretical background}
 \section{Introduction to t-SNE}
 \input{sections/tsne}
-\section{Extension of t-SNE to SG-t-SNE (SG-t-SNE-Pi.jl)}
+\section{Extension of t-SNE to SG-t-SNE \(SG-t-SNE-Pi.jl\)}
 \input{sections/sgtsnepi}
 
 % Benchmarking current implementation chapter
