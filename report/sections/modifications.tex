@@ -1,0 +1,11 @@
+As we mentioned previously on the profiling section, the most resource intensive part
+of the code was the attraction\_force() function. By changing this function to attraction\_force\_symm()
+we will attempt to achieve better results even though the initial profiling time was discouraging. 
+We will now proceed to test the new function with different number of threads to see how the
+performance is affected. This will constitute the last and final version of the SG-t-SNE-Pi algorithm:
+\begin{itemize}
+    \item The pure Julia implementation of the SG-t-SNE-Pi algorithm after the modifications.
+\end{itemize}
+
+We create a new julia file called bhembed.jl (Barnes Hut embed) which will be the same as embed.jl 
+with the only difference that this one will use the parallelized method of calculating the attractions forces.

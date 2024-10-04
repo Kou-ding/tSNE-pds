@@ -1,18 +1,14 @@
-Now, to test our efforts we will be going through a detailed comparison between:
-\begin{itemize}
-    \item The original C/C++ implementation of the SG-t-SNE-Pi algorithm.
-    \item The pure Julia implementation of the SG-t-SNE-Pi algorithm before the modifications.
-    \item The pure Julia implementation of the SG-t-SNE-Pi algorithm after the modifications.
-\end{itemize}
-All the tests where performed on the same machine with the following specifications:
-\begin{itemize}
-    \item CPU: Intel Core i5-4460 @ 3.20GHz
-    \item RAM: 16GB DDR3 787MHz
-    \item OS: WSL 2 on Windows 10 Pro 64-bit
-    \item Julia version: 1.10.0
-\end{itemize}
-The P matrix used for our results was set in a pseudo-random manner to ensure reproducibility. The parameters
-used can be summed up in the following Julia code:
+To change the number of threads Julia utilizes we use the JULIA\_NUM\_THREADS environment variable.
+\begin{minted}[breaklines,escapeinside=||,
+                mathescape=true, 
+                linenos, 
+                numbersep=3pt, 
+                gobble=2, 
+                frame=lines, 
+                fontsize=\small, 
+                framesep=2mm]{bash}
+    export JULIA_NUM_THREADS=4
+\end{minted}
 \begin{minted}[breaklines,escapeinside=||,
                 mathescape=true, 
                 linenos, 
@@ -21,32 +17,30 @@ used can be summed up in the following Julia code:
                 frame=lines, 
                 fontsize=\small, 
                 framesep=2mm]{julia} 
-    n = 1000;   # number of points
-    d = 10;     # average degree
-    
-    # Set the random seed for reproducibility
-    Random.seed!(42)
-    
-    # Generate the sparse matrix with a deterministic random pattern
-    P = sprand(n, n, d/n)
-
-    # Benchmark the sgtsnepi function
-    results=[]
-    for i in 1:50
-        t=@elapsed SGtSNEpi.bhembed( P )
-        push!(results,t)
-    end
+    # Inside the julia environment type:
+    Threads.nthreads() # to check the number of threads julia is using
 \end{minted}
-The results of the benchmarks are shown in the following graphs:
-\begin{figure}[H]
-    \includegraphics[width=0.5\textwidth]{media/c-c++plot.png}
-    \caption{C/C++ with Julia wrapper}
-\end{figure}
-\begin{figure}[H]
-    \includegraphics[width=0.5\textwidth]{media/c-c++pureJulia.png}
-    \caption{Pure Julia }
-\end{figure}
-\begin{figure}[H]
-    \includegraphics[width=0.5\textwidth]{media/pureJuliaMod.png}
-    \caption{Pure Julia \(modified\)}
-\end{figure}
+
+Graphs of the results are shown below:
+\begin{itemize}
+    \item 1 thread
+    \begin{figure}[H]
+        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm1.png}
+        \caption{Pure Julia (modified) and 1 thread}
+    \end{figure}
+    \item 2 threads
+    \begin{figure}[H]
+        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm2.png}
+        \caption{Pure Julia (modified) and 2 threads}
+    \end{figure}
+    \item 4 threads
+    \begin{figure}[H]
+        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm4.png}
+        \caption{Pure Julia (modified) and 4 threads}
+    \end{figure}
+    \item 8 threads
+    \begin{figure}[H]
+        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm8.png}
+        \caption{Pure Julia (modified) and 8 threads}
+    \end{figure}
+\end{itemize}
