@@ -10,9 +10,31 @@ After taking a closer look we notice the following resource intensive parts:
 \begin{itemize}
     % inclusive time: time spent in the function and all functions it calls
     % exclusive time: time spent in the function itself
-    \item function embed, exclusive|20\% or inclusive|83\% 
-    \item In embed: z = \_embed!(), exclusive|19\% or inclusive|82\% 
-    \item In \_embed!(): attraction\_force!(), exclusive|15\% or inclusive|72\%
+    \item function embed, exclusive $\mid$ 20\% or inclusive $\mid$ 83\% 
+    \item In embed: 
+    \begin{minted}[breaklines,escapeinside=||,
+                mathescape=true, 
+                linenos, 
+                numbersep=3pt, 
+                gobble=2, 
+                frame=lines, 
+                fontsize=\small, 
+                framesep=2mm]{julia}
+        z = _embed!() # exclusive|19\% or inclusive|82\%
+    \end{minted}
+
+    \item In \_embed!(): 
+    \begin{minted}[breaklines,escapeinside=||,
+                mathescape=true, 
+                linenos, 
+                numbersep=3pt, 
+                gobble=2, 
+                frame=lines, 
+                fontsize=\small, 
+                framesep=2mm]{julia}
+        attraction_force!() # exclusive|15\% or inclusive|72\%
+    \end{minted}
+
     \item In attraction\_force!(): 
     \begin{minted}[breaklines,escapeinside=||,
                 mathescape=true, 
