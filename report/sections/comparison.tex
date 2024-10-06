@@ -7,7 +7,7 @@ To change the number of threads Julia utilizes we use the JULIA\_NUM\_THREADS en
                 frame=lines, 
                 fontsize=\small, 
                 framesep=2mm]{bash}
-    export JULIA_NUM_THREADS=4
+    export JULIA_NUM_THREADS=4 # to assign 4 threads to Julia
 \end{minted}
 \begin{minted}[breaklines,escapeinside=||,
                 mathescape=true, 
@@ -25,22 +25,22 @@ Graphs of the results are shown below:
 \begin{itemize}
     \item 1 thread
     \begin{figure}[H]
-        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm1.png}
+        \includegraphics[width=0.5\textwidth]{media/bhembed1.png}
         \caption{Pure Julia (modified) and 1 thread}
     \end{figure}
     \item 2 threads
     \begin{figure}[H]
-        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm2.png}
+        \includegraphics[width=0.5\textwidth]{media/bhembed2.png}
         \caption{Pure Julia (modified) and 2 threads}
     \end{figure}
     \item 4 threads
     \begin{figure}[H]
-        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm4.png}
+        \includegraphics[width=0.5\textwidth]{media/bhembed4.png}
         \caption{Pure Julia (modified) and 4 threads}
     \end{figure}
     \item 8 threads
     \begin{figure}[H]
-        \includegraphics[width=0.5\textwidth]{media/embedProfilingSymm8.png}
+        \includegraphics[width=0.5\textwidth]{media/bhembed8.png}
         \caption{Pure Julia (modified) and 8 threads}
     \end{figure}
 \end{itemize}
